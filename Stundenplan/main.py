@@ -65,3 +65,9 @@ cursor.execute("""
         foreign key (LehrerID) lehrer(LehrerID)
     )
     """)
+
+# commit the command
+database.commit()
+
+# close connection
+database.close()
