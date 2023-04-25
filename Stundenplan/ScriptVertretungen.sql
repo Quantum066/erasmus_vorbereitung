@@ -25,19 +25,14 @@ DROP TABLE IF EXISTS `fachzulehrer`;
 CREATE TABLE `fachzulehrer` (
   `LehrerID` int unsigned NOT NULL,
   `Fach` varchar(15) DEFAULT NULL,
-  KEY `LehrerID` (`LehrerID`),
   CONSTRAINT `fachzulehrer_ibfk_1` FOREIGN KEY (`LehrerID`) REFERENCES `lehrer` (`LehrerID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ;
+create index fachzulehrer_idx1 on `fachzulehrer` (`LehrerID`);
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `fachzulehrer`
 --
-
-LOCK TABLES `fachzulehrer` WRITE;
-/*!40000 ALTER TABLE `fachzulehrer` DISABLE KEYS */;
-/*!40000 ALTER TABLE `fachzulehrer` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `klasse`
@@ -52,21 +47,16 @@ CREATE TABLE `klasse` (
   `SecondKlassenLeiter` int unsigned NOT NULL,
   `Zimmer` int unsigned NOT NULL,
   PRIMARY KEY (`Zimmer`),
-  KEY `KlassenLeiter` (`KlassenLeiter`),
-  KEY `SecondKlassenLeiter` (`SecondKlassenLeiter`),
   CONSTRAINT `klasse_ibfk_1` FOREIGN KEY (`KlassenLeiter`) REFERENCES `lehrer` (`LehrerID`),
   CONSTRAINT `klasse_ibfk_2` FOREIGN KEY (`SecondKlassenLeiter`) REFERENCES `lehrer` (`LehrerID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ;
+create index klasse_idx1 on `klasse` (`KlassenLeiter`);
+create index klasse_idx2 on `klasse` (`SecondKlassenLeiter`);
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `klasse`
 --
-
-LOCK TABLES `klasse` WRITE;
-/*!40000 ALTER TABLE `klasse` DISABLE KEYS */;
-/*!40000 ALTER TABLE `klasse` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `lehrer`
@@ -76,21 +66,15 @@ DROP TABLE IF EXISTS `lehrer`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `lehrer` (
-  `LehrerID` int unsigned NOT NULL AUTO_INCREMENT,
+  `LehrerID` int unsigned PRIMARY KEY,
   `LehrerName` varchar(50) NOT NULL,
-  `VertretungsStunde` int unsigned NOT NULL,
-  PRIMARY KEY (`LehrerID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `VertretungsStunde` int unsigned NOT NULL
+);
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `lehrer`
 --
-
-LOCK TABLES `lehrer` WRITE;
-/*!40000 ALTER TABLE `lehrer` DISABLE KEYS */;
-/*!40000 ALTER TABLE `lehrer` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `stunde`
@@ -106,17 +90,12 @@ CREATE TABLE `stunde` (
   `Raum` int unsigned NOT NULL,
   `Fach` varchar(15) NOT NULL,
   PRIMARY KEY (`Raum`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `stunde`
 --
-
-LOCK TABLES `stunde` WRITE;
-/*!40000 ALTER TABLE `stunde` DISABLE KEYS */;
-/*!40000 ALTER TABLE `stunde` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `stundenplan`
@@ -130,18 +109,12 @@ CREATE TABLE `stundenplan` (
   `Stunde` int unsigned NOT NULL,
   `StundeRot` int unsigned NOT NULL,
   PRIMARY KEY (`StundeRot`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `stundenplan`
 --
-
-LOCK TABLES `stundenplan` WRITE;
-/*!40000 ALTER TABLE `stundenplan` DISABLE KEYS */;
-/*!40000 ALTER TABLE `stundenplan` ENABLE KEYS */;
-UNLOCK TABLES;
-/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
